@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+// Count user visits
+if (!isset($_SESSION['usm_count'])) {
+    $_SESSION['usm_count'] = 1;
+} else {
+    $_SESSION['usm_count']++;
+}
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     // User is already logged in, redirect to welcome page  
     $username = $_POST['username'];
@@ -8,6 +16,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // Set session variable
         $_SESSION['username'] = $username;
         header("Location: dashboard.php");
+        exit;
     }
 }
 ?>
